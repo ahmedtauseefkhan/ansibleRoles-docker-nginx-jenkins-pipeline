@@ -1,0 +1,31 @@
+pipeline {
+    agent none
+    stages {
+        stage('Node.js Version') {
+            agent {
+                docker {
+                    image 'node:14.1'
+                }
+            }
+            steps {
+                script {
+                    sh 'node -v'
+                    sh 'echo "Node version: $(node -v) Tauseef"'
+                }
+            }
+        }
+        stage('Maven Version') {
+            agent {
+                docker {
+                    image 'maven:3.8.1'
+                }
+            }
+            steps {
+                script {
+                    sh 'mvn -v'
+                    sh 'echo "Maven version: $(mvn -v | grep "Apache Maven") Tauseef"'
+                }
+            }
+        }
+    }
+}
